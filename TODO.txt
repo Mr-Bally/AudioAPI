@@ -1,0 +1,25 @@
+
+	TODO:
+
+- Create container for Dependancy Injection of repositories etc
+- Create Git ignore file
+- Add auto populate on last updated field (SQL or C#?)
+- Create Git repo
+- Check on Stored proc vs query
+- Test database connection works
+- Create service layer between repo and api?
+- Gateway/ authentication for API
+- Async methods
+- Mapping the audio file paths to audio files and converting to stream (service layer)
+- Unit testing
+- Testing console
+- Constraint on the filename & author
+- Root file path in config
+- File path builder to save? (author/album/filename)
+- Album /audio file collections?
+- test audio data
+- Steaming?
+- Add read me
+- Create SQL scripts for DB, stored proc
+- Enhance database (languages, authors, genres etc)
+- Deploy to Azure
