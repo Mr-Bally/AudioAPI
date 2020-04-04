@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,24 +12,25 @@ namespace AudioWebAPI.Controllers
     {
         private readonly ILogger<AudioController> _logger;
 
-        public AudioController(ILogger<AudioController> logger)
+        private readonly IAudioService _audioService;
+
+        public AudioController(ILogger<AudioController> logger, IAudioService audioService)
         {
             _logger = logger;
+            _audioService = audioService;
         }
         
         [HttpGet("/{id}")]
-        public async Task<ActionResult<AudioFile>> GetTodoItem(string id)
+        public AudioFile GetAudioFile(Guid id)
         {
-            //var audioFile = await _context.TodoItems.FindAsync(id);
+            var audioFile = _audioService.GetAudioFile(id);
 
-            //if (audioFile is null)
-            //{
-            //    _logger.LogInformation($"Error: Could not find audio file for ID: {id}");
-            //    return NotFound();
-            //}
+            if (audioFile is null)
+            {
+                _logger.LogError($"Error: Could not find audio file with ID: { id.ToString() }");
+            }
 
-            //return audioFile;
-            return null;
+            return audioFile;
         }
 
         [HttpPost("/store")]

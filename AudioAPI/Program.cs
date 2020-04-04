@@ -9,10 +9,14 @@ namespace AudioAPI
         static void Main(string[] args)
         {
             Console.WriteLine("Audio API Test Console");
+               
+        }
 
+        private static void InsertDataToDb()
+        {
             var data = DummyData.GetData(10).ToList();
 
-            data.ForEach(x => Console.WriteLine(x.ToString()));
+            // Add call to AudioService to insert dummy data
         }
     }
 }
