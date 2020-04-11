@@ -34,10 +34,9 @@ namespace AudioWebAPI.Controllers
         }
 
         [HttpPost("/store")]
-        public async Task<ActionResult<AudioFile>> StoreAudioFile(AudioFile audioFile)
+        public bool StoreAudioFile(AudioFile audioFile)
         {
-            return null;
-            // Store file and return whether it was saved successfully
+            return _audioService.AddAudioFile(audioFile);
         }
     }
 }

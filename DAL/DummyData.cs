@@ -4,13 +4,30 @@ using System.Collections.Generic;
 
 namespace AudioAPIConsole
 {
-    public static class DummyData
+    public class DummyData
     {
-        private static List<string> FileNames = new List<string>();
+        private readonly IAudioService _audioService;
+
+        private List<string> FileNames = new List<string>();
 
         private const string FileName = "TestFile";
 
-        public static IEnumerable<AudioFile> GetData(int count)
+        public DummyData(IAudioService audioService)
+        {
+            _audioService = audioService;
+        }
+
+        public void PopulateTable(int count)
+        {
+            var data = GetData(count);
+
+            foreach(var record in data)
+            {
+                _audioService.AddAudioFile(record);    
+            }
+        }
+
+        private IEnumerable<AudioFile> GetData(int count)
         {
             var toReturn = new List<AudioFile>();
 
@@ -21,7 +38,7 @@ namespace AudioAPIConsole
             return toReturn;
         }
 
-        private static AudioFile GenerateAudioFile(string fileName)
+        private AudioFile GenerateAudioFile(string fileName)
         {
             return new AudioFile
             {
@@ -32,7 +49,7 @@ namespace AudioAPIConsole
             };
         }
 
-        private static void GetListOfFileNames(int count)
+        private void GetListOfFileNames(int count)
         {
             for (var x = 0; x < count; x++)
             {

@@ -1,6 +1,6 @@
 ﻿using AudioAPIConsole;
+using DAL;
 using System;
-using System.Linq;
 
 namespace AudioAPI
 {
@@ -9,14 +9,9 @@ namespace AudioAPI
         static void Main(string[] args)
         {
             Console.WriteLine("Audio API Test Console");
-               
-        }
 
-        private static void InsertDataToDb()
-        {
-            var data = DummyData.GetData(10).ToList();
-
-            // Add call to AudioService to insert dummy data
+            var dummyData = new DummyData(new AudioService(new AudioRepository()));
+            dummyData.PopulateTable(1);
         }
     }
 }

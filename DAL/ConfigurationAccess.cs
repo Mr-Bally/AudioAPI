@@ -8,6 +8,6 @@ namespace DAL
 
         public static string GetProviderString(string name) => ConfigurationManager.ConnectionStrings[name].ProviderName;
 
-        public static string GetAudioFilePath(string name) => ConfigurationManager.AppSettings[name];
+        public static string GetAudioFilePath() => ConfigurationManager.AppSettings["audioFileStorage"];
     }
 }

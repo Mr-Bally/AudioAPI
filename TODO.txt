@@ -1,20 +1,15 @@
 
 	TODO:
 
-- Create container for Dependancy Injection of repositories etc
 - Add auto populate on last updated field (SQL or C#?)											- Test
-- Check on Stored proc vs query
 - Test database connection works
-- Gateway/ authentication for API
 - Async methods
 - Mapping the audio file paths to audio files and converting to stream (service layer)
 - Unit testing
-- Testing console
 - File path builder to save? (author/album/filename)
 - Album /audio file collections?
 - test audio data
 - Steaming?
 - Add read me
-- Create SQL scripts for DB, stored proc
-- Enhance database (languages, authors, genres etc)
+- Create SQL scripts for DB
 - Deploy to Azure

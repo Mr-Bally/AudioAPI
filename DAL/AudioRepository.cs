@@ -7,9 +7,16 @@ namespace DAL
 {
     public class AudioRepository : IAudioRepository
     {
-        public bool AddAudioFile(AudioFile audioFile)
+        private const string AudioDb = "AudioDb";
+
+        public int AddAudioFile(AudioFile audioFile)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
+            {
+                return dbConnection.Execute(@$"INSERT INTO AudioFiles(Id, FileName, Author, FilePath)
+                    VALUES (${ audioFile.Id.ToString() }, ${ audioFile.FileName }, ${ audioFile.AuthorId.ToString() }, 
+                    ${ audioFile.FilePath } );");
+            }
         }
 
         public AudioFile DeleteAudioFile(Guid id)
@@ -19,7 +26,7 @@ namespace DAL
 
         public AudioFile GetAudioFile(Guid id)
         {
-            using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString("AudioDb")))
+            using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
             {
                 return dbConnection.QueryFirst<AudioFile>($"SELECT * FROM AudioFiles WHERE Id = {id}");
             }

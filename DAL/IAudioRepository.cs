@@ -8,7 +8,7 @@ namespace DAL
     {
         AudioFile GetAudioFile(Guid id);
         AudioFile DeleteAudioFile(Guid id);
-        bool AddAudioFile(AudioFile audioFile);
+        int AddAudioFile(AudioFile audioFile);
         bool UpdateAudioFile(AudioFile audioFile);
     }
 }
