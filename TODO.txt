@@ -7,8 +7,6 @@
 - File path builder to save? (author/album/filename)
 - Album /audio file collections?
 - test audio data
-- Steaming?
 - Add read me
-- Add remaining stored procs
 - Create SQL scripts for DB
 - Deploy to Azure
