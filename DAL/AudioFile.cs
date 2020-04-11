@@ -15,7 +15,7 @@ namespace DAL
 
         public DateTime LastUpdated { get; set; }
 
-        public Stream AudioData { get; set; }
+        public byte[] AudioData { get; set; }
 
         public override string ToString()
         {

@@ -1,30 +1,40 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 
 namespace DAL
 {
     public class AudioService : IAudioService
     {
+        private readonly ILogger _logger;
+
         private readonly IAudioRepository _audioRepository;
+
+        private readonly IAudioFileService _audioFileService;
 
         private readonly string _audioFilePath = ConfigurationAccess.GetAudioFilePath();
 
-        public AudioService(IAudioRepository audioRepository)
+        public AudioService(ILogger<AudioService> logger, IAudioRepository audioRepository, IAudioFileService audioFileService)
         {
             _audioRepository = audioRepository;
+            _audioFileService = audioFileService;
+            _logger = logger;
         }
 
         public bool AddAudioFile(AudioFile audioFile)
         {
-            audioFile.FilePath = _audioFilePath + $"/{ audioFile.AuthorId.ToString() }/{ audioFile.Id }/";
+            audioFile.FilePath = _audioFilePath + $"/{ audioFile.AuthorId.ToString() }/";
             
             var result = _audioRepository.AddAudioFile(audioFile);
-
-            if (result == 1)
+            
+            if (result == 1 && audioFile?.AudioData.Length > 0 && 
+                _audioFileService.SaveAudioFile(audioFile.FilePath, audioFile.Id.ToString(), audioFile.AudioData))
             {
-                // Add in logic for saving the audio file stream to file location
-
                 return true;
             }
+
+            _audioRepository.DeleteAudioFile(audioFile.Id);
+            
+            _logger.LogError($"Could not save audio file, ID: { audioFile.Id }, File length: { audioFile.AudioData.Length }");
 
             return false;
         }

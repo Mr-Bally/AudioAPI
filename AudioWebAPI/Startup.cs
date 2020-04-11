@@ -20,6 +20,7 @@ namespace AudioWebAPI
         {
             services.AddScoped<IAudioService, AudioService>();
             services.AddScoped<IAudioRepository, AudioRepository>();
+            services.AddScoped<IAudioFileService, AudioFileService>();
             
             services.AddControllers();
         }

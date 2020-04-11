@@ -2,11 +2,6 @@
 	TODO:
 
 - Async methods
-- Mapping the audio file paths to audio files and converting to stream (service layer)
-- Unit testing
-- File path builder to save? (author/album/filename)
-- Album /audio file collections?
-- test audio data
 - Add read me
 - Create SQL scripts for DB
 - Deploy to Azure
