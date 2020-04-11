@@ -15,19 +15,21 @@ namespace DAL
 
         public bool AddAudioFile(AudioFile audioFile)
         {
-            audioFile.FilePath = _audioFilePath + $"{ audioFile.AuthorId.ToString() }/{ audioFile.Id }/";
+            audioFile.FilePath = _audioFilePath + $"/{ audioFile.AuthorId.ToString() }/{ audioFile.Id }/";
             
             var result = _audioRepository.AddAudioFile(audioFile);
 
             if (result == 1)
             {
-                // If save successful then save the audio file to the given path    
+                // Add in logic for saving the audio file stream to file location
+
+                return true;
             }
 
-            return true;
+            return false;
         }
 
-        public AudioFile DeleteAudioFile(Guid id)
+        public int DeleteAudioFile(Guid id)
         {
             return _audioRepository.DeleteAudioFile(id);
         }
@@ -35,11 +37,6 @@ namespace DAL
         public AudioFile GetAudioFile(Guid id)
         {
             return _audioRepository.GetAudioFile(id);
-        }
-
-        public bool UpdateAudioFile(AudioFile audioFile)
-        {
-            return _audioRepository.UpdateAudioFile(audioFile);
         }
     }
 }

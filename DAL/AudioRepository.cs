@@ -13,28 +13,36 @@ namespace DAL
         {
             using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
             {
-                return dbConnection.Execute(@$"INSERT INTO AudioFiles(Id, FileName, Author, FilePath)
-                    VALUES (${ audioFile.Id.ToString() }, ${ audioFile.FileName }, ${ audioFile.AuthorId.ToString() }, 
-                    ${ audioFile.FilePath } );");
+                return dbConnection.Execute("dbo.AddAudioFile @Id, @FileName, @AuthorId, @FilePath", new
+                {
+                    audioFile.Id,
+                    audioFile.FileName,
+                    audioFile.AuthorId,
+                    audioFile.FilePath
+                });
             }
         }
 
-        public AudioFile DeleteAudioFile(Guid id)
+        public int DeleteAudioFile(Guid id)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
+            {
+                return dbConnection.Execute("dbo.DeleteAudioFile @Id", new
+                {
+                    Id = id
+                });
+            }
         }
 
         public AudioFile GetAudioFile(Guid id)
         {
             using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
             {
-                return dbConnection.QueryFirst<AudioFile>($"SELECT * FROM AudioFiles WHERE Id = {id}");
+                return dbConnection.QueryFirst<AudioFile>("dbo.GetAudioFile @Id", new
+                {
+                    Id = id
+                });
             }
-        }
-
-        public bool UpdateAudioFile(AudioFile audioFile)
-        {
-            throw new NotImplementedException();
         }
     }
 }
