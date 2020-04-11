@@ -3,4 +3,5 @@
 
 - Async methods
 - Create SQL scripts for DB
-- Deploy to Azure
+- Test controller
+- Add in missing routes to controller
