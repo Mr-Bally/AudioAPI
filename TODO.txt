@@ -2,6 +2,5 @@
 	TODO:
 
 - Async methods
-- Add read me
 - Create SQL scripts for DB
 - Deploy to Azure
