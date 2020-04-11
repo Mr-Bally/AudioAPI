@@ -2,6 +2,5 @@
 	TODO:
 
 - Async methods
-- Create SQL scripts for DB
 - Test controller
 - Add in missing routes to controller

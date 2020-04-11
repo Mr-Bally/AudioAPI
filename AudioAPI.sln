@@ -14,7 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalUnitTests", "DalUnitTests\DalUnitTests.csproj", "{03CA7C38-BA9B-4484-91C0-07FB9E793353}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalUnitTests", "DalUnitTests\DalUnitTests.csproj", "{03CA7C38-BA9B-4484-91C0-07FB9E793353}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Scripts", "SQL Scripts", "{DCCB800C-4C81-482C-B6CF-F74E590F4A46}"
+	ProjectSection(SolutionItems) = preProject
+		DbSchema.sql = DbSchema.sql
+		StoredProcs.sql = StoredProcs.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +47,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DCCB800C-4C81-482C-B6CF-F74E590F4A46} = {84E8EF0D-EDCD-4B2E-9BAF-4479E8E0ED92}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFDD7D0D-4895-4672-968C-8E881F7D849C}
