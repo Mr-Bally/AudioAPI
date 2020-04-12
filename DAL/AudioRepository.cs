@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -9,11 +10,11 @@ namespace DAL
     {
         private const string AudioDb = "AudioDb";
 
-        public int AddAudioFile(AudioFile audioFile)
+        public async Task<int> AddAudioFile(AudioFile audioFile)
         {
             using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
             {
-                return dbConnection.Execute("dbo.AddAudioFile @Id, @FileName, @AuthorId, @FilePath", new
+                return await dbConnection.ExecuteAsync("dbo.AddAudioFile @Id, @FileName, @AuthorId, @FilePath", new
                 {
                     audioFile.Id,
                     audioFile.FileName,
@@ -23,22 +24,22 @@ namespace DAL
             }
         }
 
-        public int DeleteAudioFile(Guid id)
+        public async Task<int> DeleteAudioFile(Guid id)
         {
             using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
             {
-                return dbConnection.Execute("dbo.DeleteAudioFile @Id", new
+                return await dbConnection.ExecuteAsync("dbo.DeleteAudioFile @Id", new
                 {
                     Id = id
                 });
             }
         }
 
-        public AudioFile GetAudioFile(Guid id)
+        public async Task<AudioFile> GetAudioFile(Guid id)
         {
             using (IDbConnection dbConnection = new SqlConnection(ConfigurationAccess.GetConnectionString(AudioDb)))
             {
-                return dbConnection.QueryFirst<AudioFile>("dbo.GetAudioFile @Id", new
+                return await dbConnection.QueryFirstAsync<AudioFile>("dbo.GetAudioFile @Id", new
                 {
                     Id = id
                 });

@@ -21,9 +21,9 @@ namespace AudioWebAPI.Controllers
         }
         
         [HttpGet("/{id}")]
-        public AudioFile GetAudioFile(Guid id)
+        public async Task<AudioFile> GetAudioFile(Guid id)
         {
-            var audioFile = _audioService.GetAudioFile(id);
+            var audioFile = await _audioService.GetAudioFile(id);
 
             if (audioFile is null)
             {
@@ -34,9 +34,22 @@ namespace AudioWebAPI.Controllers
         }
 
         [HttpPost("/store")]
-        public bool StoreAudioFile(AudioFile audioFile)
+        public async Task<bool> StoreAudioFile(AudioFile audioFile)
         {
-            return _audioService.AddAudioFile(audioFile);
+            var result = await _audioService.AddAudioFile(audioFile);
+
+            if (!result)
+            { 
+                _logger.LogError($"Error: Could not store audio file with ID: { audioFile.ToString() }");
+            }
+
+            return result;
+        }
+
+        [HttpDelete("/Delete/{id}")]
+        public async Task DeleteAudioFile(Guid id)
+        {
+            var result = await _audioService.DeleteAudioFile(id);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -20,33 +21,33 @@ namespace DAL
             _logger = logger;
         }
 
-        public bool AddAudioFile(AudioFile audioFile)
+        public async Task<bool> AddAudioFile(AudioFile audioFile)
         {
             audioFile.FilePath = _audioFilePath + $"/{ audioFile.AuthorId.ToString() }/";
             
-            var result = _audioRepository.AddAudioFile(audioFile);
+            var result = await _audioRepository.AddAudioFile(audioFile);
             
             if (result == 1 && audioFile?.AudioData.Length > 0 && 
-                _audioFileService.SaveAudioFile(audioFile.FilePath, audioFile.Id.ToString(), audioFile.AudioData))
+                await _audioFileService.SaveAudioFile(audioFile.FilePath, audioFile.Id.ToString(), audioFile.AudioData))
             {
                 return true;
             }
 
-            _audioRepository.DeleteAudioFile(audioFile.Id);
+            await _audioRepository.DeleteAudioFile(audioFile.Id);
             
             _logger.LogError($"Could not save audio file, ID: { audioFile.Id }, File length: { audioFile.AudioData.Length }");
 
             return false;
         }
 
-        public int DeleteAudioFile(Guid id)
+        public async Task<int> DeleteAudioFile(Guid id)
         {
-            return _audioRepository.DeleteAudioFile(id);
+            return await _audioRepository.DeleteAudioFile(id);
         }
 
-        public AudioFile GetAudioFile(Guid id)
+        public async Task<AudioFile> GetAudioFile(Guid id)
         {
-            return _audioRepository.GetAudioFile(id);
+            return await _audioRepository.GetAudioFile(id);
         }
     }
 }

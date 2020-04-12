@@ -1,7 +1,9 @@
-﻿namespace DAL
+﻿using System.Threading.Tasks;
+
+namespace DAL
 {
     public interface IAudioFileService
     {
-        bool SaveAudioFile(string path, string fileName, byte[] data);
+        Task<bool> SaveAudioFile(string path, string fileName, byte[] data);
     }
 }

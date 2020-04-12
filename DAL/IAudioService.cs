@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace DAL
 {
     public interface IAudioService
     {
-        AudioFile GetAudioFile(Guid id);
-        int DeleteAudioFile(Guid id);
-        bool AddAudioFile(AudioFile audioFile);
+        Task<AudioFile> GetAudioFile(Guid id);
+        Task<int> DeleteAudioFile(Guid id);
+        Task<bool> AddAudioFile(AudioFile audioFile);
     }
 }

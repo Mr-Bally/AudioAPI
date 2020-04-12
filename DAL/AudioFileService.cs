@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -15,14 +16,14 @@ namespace DAL
             _logger = logger;
         }
 
-        public bool SaveAudioFile(string path, string fileName, byte[] data)
+        public async Task<bool> SaveAudioFile(string path, string fileName, byte[] data)
         {
             if (!CheckFilePath(path))
             {
                 return false;
             }
 
-            return SaveAudioFileToPath(path, fileName, data);
+            return await SaveAudioFileToPath(path, fileName, data);
         }
 
         private bool CheckFilePath(string filePath)
@@ -47,7 +48,7 @@ namespace DAL
             return false;
         }
 
-        private bool SaveAudioFileToPath(string path, string fileName, byte[] audioFile)
+        private async Task<bool> SaveAudioFileToPath(string path, string fileName, byte[] audioFile)
         {
             var fullPath = path + fileName + DefaultFileExtension;
 
@@ -55,7 +56,7 @@ namespace DAL
             {
                 using (FileStream fsNew = new FileStream(fullPath, FileMode.Create, FileAccess.Write))
                 {
-                    fsNew.Write(audioFile, 0, audioFile.Length);
+                    await fsNew.WriteAsync(audioFile, 0, audioFile.Length);
                 }
 
                 return true;
