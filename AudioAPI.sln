@@ -8,9 +8,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{17367562-FE1C-494C-9330-596D432B61DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{84E8EF0D-EDCD-4B2E-9BAF-4479E8E0ED92}"
-	ProjectSection(SolutionItems) = preProject
-		TODO.txt = TODO.txt
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalUnitTests", "DalUnitTests\DalUnitTests.csproj", "{03CA7C38-BA9B-4484-91C0-07FB9E793353}"
 EndProject
