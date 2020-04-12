@@ -33,7 +33,7 @@ namespace AudioWebAPI.Controllers
             return audioFile;
         }
 
-        [HttpPost("/store")]
+        [HttpPost("/{audioFile}")]
         public async Task<bool> StoreAudioFile(AudioFile audioFile)
         {
             var result = await _audioService.AddAudioFile(audioFile);
