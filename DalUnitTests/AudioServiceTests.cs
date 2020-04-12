@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Threading.Tasks;
 
 namespace DalUnitTests
 {
@@ -32,7 +33,7 @@ namespace DalUnitTests
         }
 
         [TestMethod]
-        public void AddAudioFile_ReturnFalse_WhenFileIsNotAdded()
+        public async Task AddAudioFile_ReturnFalse_WhenFileIsNotAdded()
         {
             // Arrange
             var audioService = CreateService();
@@ -41,18 +42,18 @@ namespace DalUnitTests
                 AudioData = new byte[10]
             };
 
-            _mockAudioRepository.Setup(x => x.AddAudioFile(audioFile)).Returns(0);
-            _mockAudioRepository.Setup(x => x.DeleteAudioFile(audioFile.Id)).Returns(1);
+            _mockAudioRepository.Setup(x => x.AddAudioFile(audioFile)).ReturnsAsync(0);
+            _mockAudioRepository.Setup(x => x.DeleteAudioFile(audioFile.Id)).ReturnsAsync(1);
 
             // Act
-            var result = audioService.AddAudioFile(audioFile);
+            var result = await audioService.AddAudioFile(audioFile);
 
             // Assert
             Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void AddAudioFile_ReturnTrue_WhenFileIsAdded()
+        public async Task AddAudioFile_ReturnTrue_WhenFileIsAdded()
         {
             // Arrange
             var audioService = CreateService();
@@ -61,12 +62,12 @@ namespace DalUnitTests
                 AudioData = new byte[10]
             };
 
-            _mockAudioRepository.Setup(x => x.AddAudioFile(audioFile)).Returns(1);
+            _mockAudioRepository.Setup(x => x.AddAudioFile(audioFile)).ReturnsAsync(1);
             _mockAudioFileService.Setup(x => x.SaveAudioFile(It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<byte[]>())).Returns(true);
+                It.IsAny<string>(), It.IsAny<byte[]>())).ReturnsAsync(true);
 
             // Act
-            var result = audioService.AddAudioFile(audioFile);
+            var result = await audioService.AddAudioFile(audioFile);
 
             // Assert
             Assert.IsTrue(result);

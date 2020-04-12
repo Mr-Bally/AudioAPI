@@ -1,6 +1,5 @@
 
 	TODO:
 
-- Async methods
 - Test controller
 - Add in missing routes to controller

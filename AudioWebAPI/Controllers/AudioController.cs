@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 
 namespace AudioWebAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[audio]")]
     public class AudioController : ControllerBase
     {
         private readonly ILogger<AudioController> _logger;
@@ -20,7 +20,7 @@ namespace AudioWebAPI.Controllers
             _audioService = audioService;
         }
         
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<AudioFile> GetAudioFile(Guid id)
         {
             var audioFile = await _audioService.GetAudioFile(id);
